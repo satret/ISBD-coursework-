@@ -21,5 +21,21 @@ drop table if exists Hunger CASCADE;
 drop table if exists Relationship CASCADE;
 drop table if exists Relationship_type CASCADE;
 
-DROP TRIGGER IF EXISTS check_owner_age_trigger ON Vechile;
+DROP TRIGGER IF EXISTS check_owner_age_trigger ON Vehicle;
+DROP TRIGGER IF EXISTS check_human_age_trigger ON Human;
 DROP TRIGGER IF EXISTS check_pet_age_trigger ON Pet;
+DROP TRIGGER IF EXISTS prevent_negative_house_dimensions_trigger ON House;
+DROP TRIGGER IF EXISTS check_valid_gender_trigger ON Genders;
+DROP TRIGGER IF EXISTS check_non_negative_grocery_count_trigger ON Grocery_store;
+DROP TRIGGER IF EXISTS check_non_negative_salary_trigger ON Job;
+DROP TRIGGER IF EXISTS check_non_negative_garage_size_trigger ON Garage;
+
+-- Удаление процедур и функций
+DROP PROCEDURE IF EXISTS change_job(INT, INT);
+DROP PROCEDURE IF EXISTS buy_furniture_by_ids(INT, INT);
+DROP PROCEDURE IF EXISTS create_relationship(INT, INT, INT);
+DROP FUNCTION IF EXISTS calculate_family_money(INT);
+DROP FUNCTION IF EXISTS change_car_color(INT, INT);
+DROP FUNCTION IF EXISTS get_family_members(INT);
+DROP FUNCTION IF EXISTS update_human_location(INT, INT, INT);
+DROP FUNCTION IF EXISTS is_person_at_home(INT);

@@ -1,8 +1,3 @@
-DROP TRIGGER IF EXISTS check_owner_age_trigger ON Vehicle;
-DROP TRIGGER IF EXISTS check_pet_age_trigger ON Pet;
-DROP PROCEDURE IF EXISTS change_job(INT, INT);
-
-
 CREATE TABLE IF NOT EXISTS Human (
     ID SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,

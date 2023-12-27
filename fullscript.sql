@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS Furnitures_house (
     ID SERIAL PRIMARY KEY,
     house_id INT NOT NULL,
 	furniture_type_id INT NOT NULL,
-	floor INT NOT NULL
+	floor INT NOT NULL CHECK (floor >= 0)
 );
 
 CREATE TABLE IF NOT EXISTS Furniture_types (
@@ -138,8 +138,8 @@ CREATE TABLE IF NOT EXISTS Grocery_store (
 	address_id INT NOT NULL,
 	x_coordinate INT NOT NULL CHECK (x_coordinate >= 0 AND x_coordinate <= 500),
 	y_coordinate INT NOT NULL CHECK (y_coordinate >= 0 AND y_coordinate <= 500),
-	length INT NOT NULL,
-    width INT NOT NULL
+	length INT NOT NULL CHECK (length > 0),
+    width INT NOT NULL CHECK (length > 0)
 );
 
 CREATE TABLE IF NOT EXISTS Food (
@@ -717,4 +717,15 @@ SELECT is_person_at_home(3);
 
 --проверка триггеров
 SELECT * FROM Pet;
-SELECT * FROM House;
+SELECT * FROM House;--НОРМ?????
+
+
+--CREATE INDEX index_family_id ON Family USING HASH(ID);
+CREATE INDEX index_human_id ON Human USING HASH(ID);
+EXPLAIN ANALYZE
+SELECT * FROM Human;
+
+--DROP INDEX IF EXISTS index_human_id;
+EXPLAIN ANALYZE
+SELECT * FROM Human
+JOIN Vehicle ON Human.ID = Vehicle.owner_id AND Vehicle.type = 'Car';
