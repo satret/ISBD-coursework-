@@ -380,10 +380,10 @@ CREATE OR REPLACE FUNCTION prevent_love_relationship()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Проверяем, что новое отношение не является сменой семейных на любовные
-    IF NEW.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name = 'Love') AND
-       OLD.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name = 'Family Member') THEN
-        RAISE EXCEPTION 'Невозможно сменить семейные отношения на любовные.';
-    END IF;
+	IF NEW.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name LIKE 'Love') AND
+	   OLD.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name LIKE 'Family Member') THEN
+		RAISE EXCEPTION 'Невозможно сменить семейные отношения на любовные.';
+	END IF;
 
     RETURN NEW;
 END;

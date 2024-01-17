@@ -100,10 +100,10 @@ CREATE OR REPLACE FUNCTION prevent_love_relationship()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Проверяем, что новое отношение не является сменой семейных на любовные
-    IF NEW.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name = 'Love') AND
-       OLD.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name = 'Family Member') THEN
-        RAISE EXCEPTION 'Невозможно сменить семейные отношения на любовные.';
-    END IF;
+	IF NEW.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name LIKE 'Love') AND
+	   OLD.relationship_type_id = (SELECT ID FROM Relationship_type WHERE name LIKE 'Family Member') THEN
+		RAISE EXCEPTION 'Невозможно сменить семейные отношения на любовные.';
+	END IF;
 
     RETURN NEW;
 END;
@@ -163,7 +163,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
---Создаем триггер, который вызывает функцию check_family_surname перед вставкой новой строки
+-- Создаем триггер, который вызывает функцию check_family_surname перед вставкой новой строки
 CREATE TRIGGER before_insert_check_family_surname
 BEFORE INSERT ON Human
 FOR EACH ROW
